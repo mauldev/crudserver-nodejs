@@ -1,20 +1,19 @@
 const express = require("express");
-
+const mongoose = require("mongoose");
 const app = express();
-
 app.use(express.json());
-
 app.use(express.urlencoded(
     {extended: true}
 ));
 
 const productData = [];
 
-const port = process.env.PORT || 2000;
-
-app.listen(port, ()=>{
-    console.log(`Connected to server at ${port}`);
-});
+mongoose.connect("mongodb+srv://mailmaul:<123123Maul*>@mauldev.834ppjk.mongodb.net/?retryWrites=true&w=majority".{
+    "useUnifiedTopology": true, "useNewUrlParse": true
+},(req,res) => {
+    console.log("Status", "Connected to mongoose")
+}
+)
 
 app.get("/", (req, res) => res.send("Hello World"));
 
@@ -76,3 +75,8 @@ app.post("/api/delete/:id", (req,res) => {
         'message': "Product Deleted"
     })
 })
+
+const port = process.env.PORT || 2000;
+app.listen(port, ()=>{
+    console.log(`Connected to server at ${port}`);
+});
