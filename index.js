@@ -37,7 +37,7 @@ app.post("/api/add_product", (req,res)=>{
     });
 })
 
-app.get("/api/get_product", (req, res) => {
+app.get("/api/get_product", (req,res) => {
     if(productData.length >0){
         res.status(200).send({
             'status_code': 200,
@@ -49,4 +49,17 @@ app.get("/api/get_product", (req, res) => {
         'products': []
        }); 
     }
+})
+
+app.put("/api/update/:id", (req,res) => {
+    let id = req.params.id *1;
+    let productToUpdate = productData.find(p=>p.id === id);
+    let index = productData.indexOf(productToUpdate);
+
+    productData[index] = req.body;
+
+    res.status(200).send({
+        'status': "succes",
+        'message': "Product Updated"
+    })
 })
