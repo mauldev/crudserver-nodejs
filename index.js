@@ -11,16 +11,17 @@ app.use(express.urlencoded(
 const productData = [];
 
 mongoose.set('strictQuery',true);
-mongoose.connect("mongodb+srv://mailmaul:<123123Maul*>@mauldev.834ppjk.mongodb.net/", (error) => {
+mongoose.connect("mongodb+srv://mailmaul:123123Maul*@mauldev.834ppjk.mongodb.net/?retryWrites=true&w=majority",
+(error) => {
     if(!error){
-        console.log("Connected");
+        console.log("Status", "Connected to mongoose")
 
-        app.post("/api/add_product", async (req,res)=>{
+        app.post("/api/add_product", async (req,res) => {
             console.log("Result", req.body);
-        
+
             let data = Product(req.body);
 
-            try {
+            try{
                 let dataToStore = await data.save();
                 res.status(200).json(dataToStore);
             } catch (error) {
@@ -28,16 +29,11 @@ mongoose.connect("mongodb+srv://mailmaul:<123123Maul*>@mauldev.834ppjk.mongodb.n
                     'status': error.message
                 })
             }
-
-
         })
-    } else {
-        console.log(error.message);
-    }    
-
-
+    }
 }
 )
+
 
 app.post("/api/add_product", (req,res)=>{
     console.log("Result", req.body);
