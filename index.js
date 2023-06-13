@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
+const Product = require("./product");
+
 app.use(express.json());
 app.use(express.urlencoded(
     {extended: true}
@@ -8,14 +10,34 @@ app.use(express.urlencoded(
 
 const productData = [];
 
-mongoose.connect("mongodb+srv://mailmaul:<123123Maul*>@mauldev.834ppjk.mongodb.net/?retryWrites=true&w=majority".{
-    "useUnifiedTopology": true, "useNewUrlParse": true
-},(req,res) => {
-    console.log("Status", "Connected to mongoose")
+mongoose.set('strictQuery',true);
+mongoose.connect("mongodb+srv://mailmaul:<123123Maul*>@mauldev.834ppjk.mongodb.net/", (error) => {
+    if(!error){
+        console.log("Connected");
+
+        app.post("/api/add_product", async (req,res)=>{
+            console.log("Result", req.body);
+        
+            let data = Product(req.body);
+
+            try {
+                let dataToStore = await data.save();
+                res.status(200).json(dataToStore);
+            } catch (error) {
+                res.status(400).json({
+                    'status': error.message
+                })
+            }
+
+
+        })
+    } else {
+        console.log(error.message);
+    }    
+
+
 }
 )
-
-app.get("/", (req, res) => res.send("Hello World"));
 
 app.post("/api/add_product", (req,res)=>{
     console.log("Result", req.body);
