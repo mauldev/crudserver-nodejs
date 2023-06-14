@@ -15,6 +15,10 @@ app.listen(port, ()=>{
     console.log(`Connected to server at ${port}`);
 });
 
+app.get('/', (req,res)=>{
+    res.send('Hello World');
+    })
+
 mongoose.set('strictQuery',true);
 mongoose.connect("mongodb+srv://mailmaul:Maul123@mauldev.834ppjk.mongodb.net/flutter",
 (error) => {
