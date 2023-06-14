@@ -28,10 +28,12 @@ mongoose.connect("mongodb+srv://mailmaul:Maul123@mauldev.834ppjk.mongodb.net/flu
 }
 )
 
+//Main Page = Hello World
 app.get('/', (req,res)=>{
     res.send('Hello World');
-    })
+})
 
+//Add Product Api
 app.post("/api/add_product", async (req,res) => {
     console.log("Result", req.body);
 
@@ -45,12 +47,9 @@ app.post("/api/add_product", async (req,res) => {
             'status': error.message
         })
     }
-
-    app.use((req, res) => {
-        res.status(404).send("Not Found");
-      });
 })
 
+//Get Product Api
 app.get("/api/get_product", async (req,res) => {
 
     try{
@@ -61,8 +60,38 @@ app.get("/api/get_product", async (req,res) => {
             'status': error.message
         })
     }
+})
 
-    app.use((req, res) => {
-        res.status(404).send("Not Found");
-      });
+//Update Product Api
+app.patch("/api/update/:id", async (req,res) => {
+    let id = req.params.id;
+    let updateData = req.body;
+    let options = {new: true};
+
+    try{
+
+        const data = await Product.findByIdAndUpdate(id,updateData, options);
+        res.send(data);
+
+    } catch (error) {
+
+        res.send(error.message);
+
+    }
+})
+
+//Delete Product Api
+app.delete("/api/delete/:id", async (req,res) => {
+    let id = req.params.id;
+
+    try{
+
+        const data = await Product.findByIdAndDelete(id);
+        res.json({'status': "Deleted the product ${data.pname} from database"});
+
+    } catch (error) {
+
+        res.json(error.message);
+
+    }
 })
