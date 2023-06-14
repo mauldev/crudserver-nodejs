@@ -21,7 +21,7 @@ mongoose.connect("mongodb+srv://mailmaul:Maul123@mauldev.834ppjk.mongodb.net/flu
     if(!error){
         console.log("Status", "Connected to mongoose")
 
-        app.get('', (req,res)=>{
+        app.get('/', (req,res)=>{
             res.send('Hello World');
             })
 
