@@ -39,6 +39,8 @@ mongoose.connect("mongodb+srv://mailmaul:Maul123@mauldev.834ppjk.mongodb.net/flu
                 })
             }
         })
+    } else {
+        console.log(error.message);
     }
 }
 )
