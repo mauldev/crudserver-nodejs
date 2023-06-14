@@ -94,7 +94,7 @@ app.post("/api/delete/:id", (req,res) => {
     })
 })
 
-const port = process.env.PORT || 2000;
-app.listen(port, ()=>{
-    console.log(`Connected to server at ${port}`);
-});
+// const port = process.env.PORT || 2000;
+// app.listen(port, ()=>{
+//     console.log(`Connected to server at ${port}`);
+// });
