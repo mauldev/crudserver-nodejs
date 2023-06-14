@@ -11,7 +11,7 @@ app.use(express.urlencoded(
 const productData = [];
 
 mongoose.set('strictQuery',true);
-mongoose.connect("mongodb+srv://mailmaul:123123Maul*@mauldev.834ppjk.mongodb.net/flutter",
+mongoose.connect("mongodb+srv://mailmaul:Maul123@mauldev.834ppjk.mongodb.net/flutter",
 (error) => {
     if(!error){
         console.log("Status", "Connected to mongoose")
