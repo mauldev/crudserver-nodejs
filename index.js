@@ -51,4 +51,24 @@ mongoose.connect("mongodb+srv://mailmaul:Maul123@mauldev.834ppjk.mongodb.net/flu
         console.log(error.message);
     }
 }
+
 )
+
+app.post("/api/add_product", async (req,res) => {
+    console.log("Result", req.body);
+
+    let data = Product(req.body);
+
+    try{
+        let dataToStore = await data.save();
+        res.status(200).json(dataToStore);
+    } catch (error) {
+        res.status(400).json({
+            'status': error.message
+        })
+    }
+
+    app.use((req, res) => {
+        res.status(404).send("Not Found");
+      });
+})
