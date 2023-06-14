@@ -38,6 +38,10 @@ mongoose.connect("mongodb+srv://mailmaul:Maul123@mauldev.834ppjk.mongodb.net/flu
                     'status': error.message
                 })
             }
+
+            app.use((req, res) => {
+                res.status(404).send("Not Found");
+              });
         })
     } else {
         console.log(error.message);
