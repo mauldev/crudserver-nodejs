@@ -87,7 +87,7 @@ app.delete("/api/delete/:id", async (req,res) => {
     try{
 
         const data = await Product.findByIdAndDelete(id);
-        res.json({'status': "Deleted the product ${data.pname} from database"});
+        res.status(204).json({'status': "Deleted the product ${data.pname} from database"});
 
     } catch (error) {
 
